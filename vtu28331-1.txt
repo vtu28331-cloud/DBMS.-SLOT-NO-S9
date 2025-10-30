@@ -1,0 +1,39 @@
+SQL> SELECT t.teamid, t.name AS teamname, t.Coach, t.Captain,(SELECT COUNT(m.matchid)FROM match m WHERE t.teamid = SUBSTR(m.result, 1, 5)) AS WinningMatchCount FROM team t;
+
+no rows selected
+
+
+SQL< SELECT t.TeamID, t.Name AS TeamName,(SELECT COUNT(*) FROM Match m WHERE(t.TeamID = m.TeamID1 OR t.TeamID = m.TeamID2) AND INSTR(m.Result, 'Tie') > 0) AS TieCount FROM Team t group by t.teamid, t.name;
+
+
+TEAMID     TEAMNAME                    TIECOUNT
+---------- ------------------------------ ----------
+1001       	india		            0
+1003      	rcb		            0
+     		
+
+SQL> SELECT * FROM team t WHERE t.teamid IN (SELECT teamid1 FROM match WHERE INSTR(result, teamid1) > 0 UNION SELECT teamid2 FROM match WHERE INSTR(result, teamid2) >);
+
+
+TEAMID          NAME                        COACH                        CAPTAIN
+---------- ------------------------------- --------------------------- ------------------------------
+1003     	  rcb                      varun                           krian
+1004        	  csk                      arunrag                          karthik
+
+
+SQL> SELECT p.playerID,p.FName,p.LName,p.age,m.matchid,m.match_Date, m.Time1,m.result FROM player p, match m WHERE p.age > 25 AND (p.teamid = m.teamid1 OR p.teamid = m.teamid2);
+
+no row selected
+
+
+
+SQL> SELECT t.TeamID, t.Name AS TeamName, t.Coach, t.Captain FROM Team t WHERE t.TeamID NOT IN (SELECT TeamID1 FROM Match UNION SELECT TeamID2 FROM Match);
+
+
+no row selected
+
+
+SQL>SELECT t.teamid, t.name AS team_name, COUNT(m.matchid) AS matches_played FROM team t JOIN match m ON t.teamid = m.teamid1 OR t.teamid = m.teamid2 GROUP BY t.teamid, t.name ORDER BY matches_played DESC
+
+no row selected
+

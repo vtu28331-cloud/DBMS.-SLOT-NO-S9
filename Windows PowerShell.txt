@@ -1,0 +1,151 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Admin> mongosh
+Current Mongosh Log ID: 68ecbbf12c0d9fd589cebea3
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.8
+Using MongoDB:          8.2.1
+Using Mongosh:          2.5.8
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2025-10-13T14:07:40.414+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use ashwitha
+switched to db ashwitha
+ashwitha> db.createcollection("cricketboard")
+TypeError: db.createcollection is not a function
+ashwitha> db.createCollection("cricketboard")
+{ ok: 1 }
+ashwitha> db.cricketboard.insertOne({Boardid:"BID01",name:"chennai cricket board",address:"chennai",phone:"9676231016"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('68ecbf222c0d9fd589cebea4')
+}
+ashwitha> db.cricketboard.find().pretty()
+[
+  {
+    _id: ObjectId('68ecbf222c0d9fd589cebea4'),
+    Boardid: 'BID01',
+    name: 'chennai cricket board',
+    address: 'chennai',
+    phone: '9676231016'
+  }
+]
+ashwitha> db.cricketboard.insertmany([{Boardid:"BID02",name:"trivallur cricketboard",address:"trivallur",phone:"6289676114"},{boardid:"BID03",name:"avadi cricketboard",address:"avadi",phone:'3445987430"}])
+Uncaught:
+SyntaxError: Unterminated string constant. (1:180)
+
+> 1 | db.cricketboard.insertmany([{Boardid:"BID02",name:"trivallur cricketboard",address:"trivallur",phone:"6289676114"},{boardid:"BID03",name:"avadi cricketboard",address:"avadi",phone:'3445987430"}])
+    |                                                                                                                                                                                     ^
+  2 |
+
+ashwitha> db.cricketboard.insertmany([{Boardid:"BID02",name:"trivallur cricketboard",address:"trivallur",phone:"6289676114"},{boardid:"BID03",name:"avadi cricketboard",address:"avadi",phone:344598743}])
+TypeError: db.cricketboard.insertmany is not a function
+ashwitha> db.cricketboard.insertMany([{Boardid:"BID02",name:"trivallur cricketboard",address:"trivallur",phone:6289676114},{boardid:"BID03",name:"avadi cricketboard",address:"avadi",phone:344598743},{Boardid:"BID04",name:"madurai cricketboard",address:"madurai",phone:9787238490}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68ecc26e2c0d9fd589cebea5'),
+    '1': ObjectId('68ecc26e2c0d9fd589cebea6'),
+    '2': ObjectId('68ecc26e2c0d9fd589cebea7')
+  }
+}
+ashwitha> db.cricketboard.find()
+[
+  {
+    _id: ObjectId('68ecbf222c0d9fd589cebea4'),
+    Boardid: 'BID01',
+    name: 'chennai cricket board',
+    address: 'chennai',
+    phone: '9676231016'
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea5'),
+    Boardid: 'BID02',
+    name: 'trivallur cricketboard',
+    address: 'trivallur',
+    phone: 6289676114
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea6'),
+    boardid: 'BID03',
+    name: 'avadi cricketboard',
+    address: 'avadi',
+    phone: 344598743
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea7'),
+    Boardid: 'BID04',
+    name: 'madurai cricketboard',
+    address: 'madurai',
+    phone: 9787238490
+  }
+]
+ashwitha> db.cricketboard.find().pretty()
+[
+  {
+    _id: ObjectId('68ecbf222c0d9fd589cebea4'),
+    Boardid: 'BID01',
+    name: 'chennai cricket board',
+    address: 'chennai',
+    phone: '9676231016'
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea5'),
+    Boardid: 'BID02',
+    name: 'trivallur cricketboard',
+    address: 'trivallur',
+    phone: 6289676114
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea6'),
+    boardid: 'BID03',
+    name: 'avadi cricketboard',
+    address: 'avadi',
+    phone: 344598743
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea7'),
+    Boardid: 'BID04',
+    name: 'madurai cricketboard',
+    address: 'madurai',
+    phone: 9787238490
+  }
+]
+ashwitha> db.cricketboard.deleteOne({Boardid:"BID04"})
+{ acknowledged: true, deletedCount: 1 }
+ashwitha> db.cricketboard.find().pretty()
+[
+  {
+    _id: ObjectId('68ecbf222c0d9fd589cebea4'),
+    Boardid: 'BID01',
+    name: 'chennai cricket board',
+    address: 'chennai',
+    phone: '9676231016'
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea5'),
+    Boardid: 'BID02',
+    name: 'trivallur cricketboard',
+    address: 'trivallur',
+    phone: 6289676114
+  },
+  {
+    _id: ObjectId('68ecc26e2c0d9fd589cebea6'),
+    boardid: 'BID03',
+    name: 'avadi cricketboard',
+    address: 'avadi',
+    phone: 344598743
+  }
+]
+ashwitha>

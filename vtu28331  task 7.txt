@@ -1,0 +1,28 @@
+SQL> CREATE OR REPLACE TRIGGER TRG-UPDATE-MATCHES
+  2  AFTER INSERT ON MATCH
+  3  FOR EACH ROW
+  4  BEGIN
+  5  INSERT INTO match_result (MatchID, TeamID, Result)
+  6  VALUES (:new.MatchID, :new.TeamID, 'Pending'); -- Assuming a default value of 'Pending' for Result
+  7  END;
+  8  /
+
+Trigger created.
+
+SQL> CREATE VIEW playermatchdetails as
+  2  select
+  3  p.PlayerID,
+  4   p.PlayerName,
+  5     p.Age,
+  6   p.Country,
+  7   COUNT(mt.MatchID) AS TotalMatchesPlayed
+  8  FROM
+  9    Player p
+ 10  LEFT JOIN
+ 11  MatchTeam mt
+ 12  ON
+ 13  p.PlayerID = mt.PlayerID
+ 14  GROUP BY
+ 15   p.PlayerID, p.PlayerName, p.Age, p.Country;
+
+View  Created.

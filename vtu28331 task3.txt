@@ -1,0 +1,72 @@
+SQL>  select location from ground WHERE matchid='m1';
+
+LOCATION
+------------------------------
+chennai
+
+
+SQL> select *from player where name LIKE 'v%';
+
+PLAYERID                  NAME
+------------------------- --------------------------------------------------
+PLAYINGROLE                                        DOB
+-------------------------------------------------- ---------
+P102                      virat
+batsman                                            28-DEC-23
+
+
+SQL> select *from player where name LIKE 'r%';
+
+PLAYERID                  NAME
+------------------------- --------------------------------------------------
+PLAYINGROLE                                        DOB
+-------------------------------------------------- ---------
+P101                      rohit
+cricket                                            14-AUG-94
+
+P104                      ram
+football                                           12-APR-84
+
+
+
+SQL> alter table player add batting varchar2(20);
+
+Table altered.
+
+SQL> alter table player add bowling varchar2(20);
+
+Table altered.
+
+
+SQL> select count(*) from player where batsman='right-hand bat';
+
+no rows selected
+
+
+SQL> select *from cricketboard where boardid IN('BID01','BID03','BID09');
+
+BOARDID                   NAME
+------------------------- --------------------------------------------------
+ADDRESS                                             CONTACTNO
+-------------------------------------------------- ----------
+BID01                     ajay
+sree ram nagar                                     9232645810
+
+BID03                     ram
+vidyanagar                                         9623458210
+
+BID09                     sai
+kurnool                                            7864442804
+
+
+SQL> select playerid,name from player where bowling='left-hand bowling';
+
+no rows selected
+
+SQL> select umpireid,fname from umpire where umpireid NOT IN(select umpireid from umpire);
+
+no rows selected
+
+
+
+

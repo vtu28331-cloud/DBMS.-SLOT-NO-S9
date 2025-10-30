@@ -1,0 +1,469 @@
+SQL> create table universitypersons(personid int PRIMARY KEY, name varchar(50), dob DATE);
+
+Table created.
+
+SQL> create table universitystudents(studentid int PRIMARY KEY, personid int, degree varchar(10) CHECK (degree IN('BE','ME','PHD')), batch DATE,FOREIGN KEY (personid) REFERENCES universitypersons(personid));
+
+Table created.
+
+SQL> create table dept(deptid int PRIMARY KEY, deptname varchar(20));
+
+Table created.
+
+SQL> create table faculty(facultyid int PRIMARY KEY, personid int, deptid int, position varchar(20), FOREIGN KEY (personid) REFERENCES universitypersons(personid));
+
+Table created.
+
+SQL> create table course(courseid int PRIMARY KEY, coursename varchar(25), credits int CHECK (credits BETWEEN 1 and 4), deptid int, FOREIGN KEY (deptid) REFERENCES dept(deptid));
+
+Table created.
+
+SQL> desc universitypersons;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PERSONID                                  NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(50)
+ DOB                                                DATE
+
+SQL> desc universitystudents;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL NUMBER(38)
+ PERSONID                                           NUMBER(38)
+ DEGREE                                             VARCHAR2(10)
+ BATCH                                              DATE
+
+SQL> desc faculty;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FACULTYID                                 NOT NULL NUMBER(38)
+ PERSONID                                           NUMBER(38)
+ DEPTID                                             NUMBER(38)
+ POSITION                                           VARCHAR2(20)
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTID                                    NOT NULL NUMBER(38)
+ DEPTNAME                                           VARCHAR2(20)
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSEID                                  NOT NULL NUMBER(38)
+ COURSENAME                                         VARCHAR2(25)
+ CREDITS                                            NUMBER(38)
+ DEPTID                                             NUMBER(38)
+
+SQL> rename dept to deptdetails;
+
+Table renamed.
+
+SQL>  desc deptdetails;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTID                                    NOT NULL NUMBER(38)
+ DEPTNAME                                           VARCHAR2(20)
+
+SQL>
+SQL>  alter table universitystudents ADD contact number(10);
+
+Table altered.
+
+SQL> alter table universitystudents ADD (gender char(1) CHECK (gender IN ('M','F')), email varchar(50));
+
+Table altered.
+
+SQL>  desc universitystudents;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL NUMBER(38)
+ PERSONID                                           NUMBER(38)
+ DEGREE                                             VARCHAR2(10)
+ BATCH                                              DATE
+ CONTACT                                            NUMBER(10)
+ GENDER                                             CHAR(1)
+ EMAIL                                              VARCHAR2(50)
+
+SQL> drop table course;
+
+Table dropped.
+
+SQL>  drop table deptdetails;
+
+Table dropped.
+
+SQL> drop table universitystudents;
+
+Table dropped.
+
+
+SQL> desc faculty;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FACULTYID                                 NOT NULL NUMBER(38)
+ PERSONID                                           NUMBER(38)
+ DEPTID                                             NUMBER(38)
+ POSITION                                           VARCHAR2(20)
+
+SQL> drop table faculty;
+
+Table dropped.
+
+
+SQL> create table person(personid varchar2(25) PRIMARY KEY, name varchar(50), dob DATE);
+
+Table created.
+
+SQL> create table dept(deptid varchar2(25) PRIMARY KEY, deptname varchar(20));
+
+Table created.
+
+SQL> create table student(studentid varchar2(25) PRIMARY KEY, personid varchar2(25), degree varchar(10) CHECK (degree IN('BE','ME','PHD')), batch DATE,FOREIGN KEY (personid) REFERENCES person(personid));
+
+Table created.
+
+SQL> create table faculty(facultyid varchar2(25) PRIMARY KEY, personid varchar2(25), deptid varchar2(25), position varchar(20), FOREIGN KEY (personid) REFERENCES person(personid));
+
+Table created.
+
+SQL> create table course(courseid varchar2(25) PRIMARY KEY, coursename varchar2(50), credits int CHECK (credits BETWEEN 1 and 4), deptid varchar2(25), FOREIGN KEY (deptid) REFERENCES dept(deptid));
+
+Table created.
+
+SQL> insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'));
+Enter value for personid: p001
+Enter value for name: sai
+Enter value for dob: 24-09-2007
+old   1: insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'))
+new   1: insert into person values ('p001', 'sai',TO_DATE('24-09-2007','DD-MM-YYYY'))
+
+1 row created.
+
+SQL> insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'));
+Enter value for personid: p002
+Enter value for name: kalyani
+Enter value for dob: 27-05-1998
+old   1: insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'))
+new   1: insert into person values ('p002', 'kalyani',TO_DATE('27-05-1998','DD-MM-YYYY'))
+
+1 row created.
+
+SQL> insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'));
+Enter value for personid: p003
+Enter value for name: srinu
+Enter value for dob: 2-02-2005
+old   1: insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'))
+new   1: insert into person values ('p003', 'srinu',TO_DATE('2-02-2005','DD-MM-YYYY'))
+
+1 row created.
+
+SQL> insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'));
+Enter value for personid: p004
+Enter value for name: seetha
+Enter value for dob: 12-08-1990
+old   1: insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'))
+new   1: insert into person values ('p004', 'seetha',TO_DATE('12-08-1990','DD-MM-YYYY'))
+
+1 row created.
+
+SQL> insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'));
+Enter value for personid: p005
+Enter value for name: kumaran
+Enter value for dob: 24-07-2007
+old   1: insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'))
+new   1: insert into person values ('p005', 'kumaran',TO_DATE('24-07-2007','DD-MM-YYYY'))
+
+1 row created.
+
+SQL> insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'));
+Enter value for personid: p006
+Enter value for name: aasritha
+Enter value for dob: 08-11-2008
+old   1: insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'))
+new   1: insert into person values ('p006', 'aasritha',TO_DATE('08-11-2008','DD-MM-YYYY'))
+
+1 row created.
+
+SQL> select * from person;
+
+PERSONID                  NAME
+------------------------- --------------------------------------------------
+DOB
+---------
+p001                      sai
+24-SEP-07
+
+p002                      kalyani
+27-MAY-98
+
+p003                      srinu
+02-FEB-05
+
+
+PERSONID                  NAME
+------------------------- --------------------------------------------------
+DOB
+---------
+p004                      seetha
+12-AUG-90
+
+p005                      kumaran
+24-JUL-07
+
+p006                      aasritha
+08-NOV-08
+
+
+6 rows selected.
+
+SQL> alter table student modify batch number;
+
+Table altered.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL VARCHAR2(25)
+ PERSONID                                           VARCHAR2(25)
+ DEGREE                                             VARCHAR2(10)
+ BATCH                                              NUMBER
+
+SQL> alter table student add (gender char(1) CHECK (gender IN ('M','F')), email varchar(50));
+
+Table altered.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL VARCHAR2(25)
+ PERSONID                                           VARCHAR2(25)
+ DEGREE                                             VARCHAR2(10)
+ BATCH                                              NUMBER
+ GENDER                                             CHAR(1)
+ EMAIL                                              VARCHAR2(50)
+
+SQL> insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email');
+Enter value for studentid: s1
+Enter value for personid: p001
+Enter value for degree: BE
+Enter value for batch: 2024
+Enter value for gender: M
+Enter value for email: sai@gmail.com
+old   1: insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email')
+new   1: insert into student values ('s1','p001','BE',2024,'M','sai@gmail.com')
+
+1 row created.
+
+SQL> insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email');
+Enter value for studentid: s2
+Enter value for personid: p002
+Enter value for degree: BE
+Enter value for batch: 2024
+Enter value for gender: F
+Enter value for email: kalyani@gmail.com
+old   1: insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email')
+new   1: insert into student values ('s2','p002','BE',2024,'F','kalyani@gmail.com')
+
+1 row created.
+
+SQL> insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email');
+Enter value for studentid: s3
+Enter value for personid: p003
+Enter value for degree: ME
+Enter value for batch: 2024
+Enter value for gender: M
+Enter value for email: srinu@gmail.com
+old   1: insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email')
+new   1: insert into student values ('s3','p003','ME',2024,'M','srinu@gmail.com')
+
+1 row created.
+
+SQL> insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email');
+Enter value for studentid: s4
+Enter value for personid: p004
+Enter value for degree: ME
+Enter value for batch: 2024
+Enter value for gender: F
+Enter value for email: seetha@gmail.com
+old   1: insert into student values ('&studentid','&personid','&degree',&batch,'&gender','&email')
+new   1: insert into student values ('s4','p004','ME',2024,'F','seetha@gmail.com')
+
+1 row created.
+
+SQL> select * from student;
+
+STUDENTID                 PERSONID                  DEGREE          BATCH G
+------------------------- ------------------------- ---------- ---------- -
+EMAIL
+--------------------------------------------------
+s1                        p001                      BE               2024 M
+sai@gmail.com
+
+s2                        p002                      BE               2024 F
+kalyani@gmail.com
+
+s3                        p003                      ME               2024 M
+srinu@gmail.com
+
+
+STUDENTID                 PERSONID                  DEGREE          BATCH G
+------------------------- ------------------------- ---------- ---------- -
+EMAIL
+--------------------------------------------------
+s4                        p004                      ME               2024 F
+seetha@gmail.com
+
+
+SQL> insert into dept values ('&deptid','&deptname');
+Enter value for deptid: cs101
+Enter value for deptname: cs3
+old   1: insert into dept values ('&deptid','&deptname')
+new   1: insert into dept values ('cs101','cs3')
+
+1 row created.
+
+SQL> insert into dept values ('&deptid','&deptname');
+Enter value for deptid: cs102
+Enter value for deptname: cs
+old   1: insert into dept values ('&deptid','&deptname')
+new   1: insert into dept values ('cs102','cs')
+
+1 row created.
+
+SQL> insert into dept values ('&deptid','&deptname');
+Enter value for deptid: me103
+Enter value for deptname: mech
+old   1: insert into dept values ('&deptid','&deptname')
+new   1: insert into dept values ('me103','mech')
+
+1 row created.
+
+SQL> insert into dept values ('&deptid','&deptname');
+Enter value for deptid: ec104
+Enter value for deptname: electronics
+old   1: insert into dept values ('&deptid','&deptname')
+new   1: insert into dept values ('ec104','electronics')
+
+1 row created.
+
+SQL> select * from dept;
+
+DEPTID                    DEPTNAME
+------------------------- --------------------
+cs101                     cs3
+cs102                     cs
+me103                     mech
+ec104                     electronics
+
+SQL> insert into faculty values('&facultyid', '&personid', '&deptid','&position');
+Enter value for facultyid: f1
+Enter value for personid: p005
+Enter value for deptid: cs101
+Enter value for position: assistant professor
+old   1: insert into faculty values('&facultyid', '&personid', '&deptid','&position')
+new   1: insert into faculty values('f1', 'p005', 'cs101','assistant professor')
+
+1 row created.
+
+SQL> insert into faculty values('&facultyid', '&personid', '&deptid','&position');
+Enter value for facultyid: f2
+Enter value for personid: p006
+Enter value for deptid: mech
+Enter value for position: Associate professor
+old   1: insert into faculty values('&facultyid', '&personid', '&deptid','&position')
+new   1: insert into faculty values('f2', 'p006', 'mech','Associate professor')
+
+1 row created.
+
+SQL> select * from faculty;
+
+FACULTYID                 PERSONID                  DEPTID
+------------------------- ------------------------- -------------------------
+POSITION
+--------------------
+f1                        p005                      cs101
+assistant professor
+
+f2                        p006                      mech
+Associate professor
+
+
+SQL> insert into course values ('&courseid','&coursename',&credits,'&deptid');
+Enter value for courseid: 1021CS207
+Enter value for coursename: DBMS
+Enter value for credits: 4
+Enter value for deptid: cs101
+old   1: insert into course values ('&courseid','&coursename',&credits,'&deptid')
+new   1: insert into course values ('1021CS207','DBMS',4,'cs101')
+
+1 row created.
+
+SQL> insert into course values ('&courseid','&coursename',&credits,'&deptid');
+Enter value for courseid: 1021CS306
+Enter value for coursename: CODING-I
+Enter value for credits: 2
+Enter value for deptid: cs101
+old   1: insert into course values ('&courseid','&coursename',&credits,'&deptid')
+new   1: insert into course values ('1021CS306','CODING-I',2,'cs101')
+
+1 row created.
+
+SQL> insert into course values ('&courseid','&coursename',&credits,'&deptid');
+Enter value for courseid: 1021ME103
+Enter value for coursename: ENGINEERING DRAWING
+Enter value for credits: 2
+Enter value for deptid: me103
+old   1: insert into course values ('&courseid','&coursename',&credits,'&deptid')
+new   1: insert into course values ('1021ME103','ENGINEERING DRAWING',2,'me103')
+
+1 row created.
+
+SQL> select * from course;
+
+COURSEID                  COURSENAME
+------------------------- --------------------------------------------------
+   CREDITS DEPTID
+---------- -------------------------
+1021CS207                 DBMS
+         4 cs101
+
+1021CS306                 CODING-I
+         2 cs101
+
+1021ME103                 ENGINEERING DRAWING
+         2 me103
+
+
+
+
+SQL>  alter table student ADD CONSTRAINT uemail UNIQUE(email);
+
+Table altered.
+
+SQL> alter table person MODIFY name varchar2(25) NOT NULL;
+
+Table altered.
+
+SQL> insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'));
+Enter value for personid: p007
+Enter value for name: dinesh
+Enter value for dob: 12-06-2006
+old   1: insert into person values ('&personid', '&name',TO_DATE('&dob','DD-MM-YYYY'))
+new   1: insert into person values ('p007', 'dinesh',TO_DATE('12-06-2006','DD-MM-YYYY'))
+
+1 row created.
+
+SQL> select DISTINCT name from person;
+
+NAME
+-------------------------
+sai
+kalyani
+srinu
+seetha
+kumaran
+aasritha
+dinesh
+
+7 rows selected.
